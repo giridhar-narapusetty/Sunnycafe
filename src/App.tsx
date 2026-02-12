@@ -7,7 +7,7 @@ import HomeView from './components/HomeView';
 import AboutView from './components/AboutView';
 import ContactView from './components/ContactView';
 import { Coffee } from 'lucide-react';
-import { MenuItem, CartItem } from './types';
+import { MenuItem, CartItem } from './types/index';
 
 export type Page = 'home' | 'menu' | 'bill' | 'about' | 'contact';
 
@@ -59,11 +59,11 @@ const App: React.FC = () => {
         return <MenuSection onAddToCart={addToCart} />;
       case 'bill':
         return (
-          <BillSection 
-            cart={cart} 
-            updateQuantity={updateQuantity} 
-            removeFromCart={removeFromCart} 
-            clearCart={clearCart} 
+          <BillSection
+            cart={cart}
+            updateQuantity={updateQuantity}
+            removeFromCart={removeFromCart}
+            clearCart={clearCart}
           />
         );
       case 'about':
@@ -77,10 +77,10 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white selection:bg-yellow-200 flex flex-col">
-      <Navbar 
-        activePage={currentPage} 
-        onPageChange={setCurrentPage} 
-        cartCount={cart.reduce((sum, item) => sum + item.quantity, 0)} 
+      <Navbar
+        activePage={currentPage}
+        onPageChange={setCurrentPage}
+        cartCount={cart.reduce((sum, item) => sum + item.quantity, 0)}
       />
 
       <main className="flex-grow pt-20">
@@ -91,7 +91,7 @@ const App: React.FC = () => {
 
       {/* Persistence Floating Cart (Only if items in cart and NOT on bill page) */}
       {cart.length > 0 && currentPage !== 'bill' && (
-        <button 
+        <button
           onClick={() => setCurrentPage('bill')}
           className="fixed bottom-8 right-8 z-[100] bg-amber-900 text-white p-5 rounded-full shadow-2xl hover:scale-110 transition-all flex items-center gap-3 active:scale-95"
         >

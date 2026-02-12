@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Trash2, Receipt, Minus, Plus, RefreshCw, User, Sun, ArrowLeft } from 'lucide-react';
-import { CartItem } from '../types';
+import { CartItem } from '../types/index';
 
 interface BillSectionProps {
   cart: CartItem[];
@@ -10,17 +10,17 @@ interface BillSectionProps {
   clearCart: () => void;
 }
 
-const BillSection: React.FC<BillSectionProps> = ({ 
-  cart, 
-  updateQuantity, 
-  removeFromCart, 
-  clearCart 
+const BillSection: React.FC<BillSectionProps> = ({
+  cart,
+  updateQuantity,
+  removeFromCart,
+  clearCart
 }) => {
   const [customerName, setCustomerName] = useState('');
   const [showReceipt, setShowReceipt] = useState(false);
 
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const tax = subtotal * 0.1; 
+  const tax = subtotal * 0.1;
   const total = subtotal + tax;
 
   const handleGenerateBill = () => {
@@ -38,17 +38,17 @@ const BillSection: React.FC<BillSectionProps> = ({
   if (cart.length === 0 && !showReceipt) {
     return (
       <div className="py-32 text-center animate-in fade-in duration-500">
-         <div className="inline-flex p-6 bg-amber-50 rounded-full text-amber-300 mb-6">
-            <Receipt size={48} />
-         </div>
-         <h2 className="text-3xl font-serif font-bold text-amber-900 mb-4">Your Cart is Empty</h2>
-         <p className="text-amber-600 mb-8">It looks like you haven't added any sunshine to your order yet.</p>
-         <button 
-           onClick={() => window.location.reload()} // Quick hack to trigger nav or just let user click nav
-           className="bg-yellow-400 text-white px-8 py-4 rounded-2xl font-bold hover:bg-yellow-500 transition-colors shadow-lg shadow-yellow-100"
-         >
-           Browse Our Menu
-         </button>
+        <div className="inline-flex p-6 bg-amber-50 rounded-full text-amber-300 mb-6">
+          <Receipt size={48} />
+        </div>
+        <h2 className="text-3xl font-serif font-bold text-amber-900 mb-4">Your Cart is Empty</h2>
+        <p className="text-amber-600 mb-8">It looks like you haven't added any sunshine to your order yet.</p>
+        <button
+          onClick={() => window.location.reload()} // Quick hack to trigger nav or just let user click nav
+          className="bg-yellow-400 text-white px-8 py-4 rounded-2xl font-bold hover:bg-yellow-500 transition-colors shadow-lg shadow-yellow-100"
+        >
+          Browse Our Menu
+        </button>
       </div>
     );
   }
@@ -62,7 +62,7 @@ const BillSection: React.FC<BillSectionProps> = ({
               <h2 className="text-4xl font-serif font-bold text-amber-900">Checkout</h2>
               <p className="text-amber-600 font-medium mt-1">Review items and finalize your sunny order</p>
             </div>
-            <button 
+            <button
               onClick={clearCart}
               className="flex items-center gap-2 text-red-500 hover:text-red-600 font-bold text-sm transition-colors"
             >
@@ -78,8 +78,8 @@ const BillSection: React.FC<BillSectionProps> = ({
               </label>
               <div className="relative">
                 <User className="absolute left-5 top-1/2 -translate-y-1/2 text-amber-400" size={20} />
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
                   placeholder="What's your name?"
@@ -89,58 +89,58 @@ const BillSection: React.FC<BillSectionProps> = ({
             </div>
 
             <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-amber-50">
-                <div className="space-y-6">
-                  {cart.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between pb-6 border-b border-amber-50 last:border-0 last:pb-0">
-                      <div className="flex-1">
-                        <h4 className="font-bold text-lg text-amber-900">{item.name}</h4>
-                        <p className="text-sm text-amber-500">${item.price.toFixed(2)} / unit</p>
-                      </div>
-                      
-                      <div className="flex items-center gap-4 bg-amber-50 rounded-xl px-2 py-1 mx-4">
-                        <button 
-                          onClick={() => updateQuantity(item.id, -1)}
-                          className="p-1.5 hover:bg-white rounded-lg text-amber-700 transition-all active:scale-90"
-                        >
-                          <Minus size={16} />
-                        </button>
-                        <span className="font-black text-amber-900 w-4 text-center">{item.quantity}</span>
-                        <button 
-                          onClick={() => updateQuantity(item.id, 1)}
-                          className="p-1.5 hover:bg-white rounded-lg text-amber-700 transition-all active:scale-90"
-                        >
-                          <Plus size={16} />
-                        </button>
-                      </div>
+              <div className="space-y-6">
+                {cart.map((item) => (
+                  <div key={item.id} className="flex items-center justify-between pb-6 border-b border-amber-50 last:border-0 last:pb-0">
+                    <div className="flex-1">
+                      <h4 className="font-bold text-lg text-amber-900">{item.name}</h4>
+                      <p className="text-sm text-amber-500">${item.price.toFixed(2)} / unit</p>
+                    </div>
 
-                      <div className="w-24 text-right font-black text-xl text-amber-900">
-                        ${(item.price * item.quantity).toFixed(2)}
-                      </div>
-
-                      <button 
-                        onClick={() => removeFromCart(item.id)}
-                        className="ml-6 p-2 text-amber-200 hover:text-red-500 transition-colors"
+                    <div className="flex items-center gap-4 bg-amber-50 rounded-xl px-2 py-1 mx-4">
+                      <button
+                        onClick={() => updateQuantity(item.id, -1)}
+                        className="p-1.5 hover:bg-white rounded-lg text-amber-700 transition-all active:scale-90"
                       >
-                        <Trash2 size={20} />
+                        <Minus size={16} />
+                      </button>
+                      <span className="font-black text-amber-900 w-4 text-center">{item.quantity}</span>
+                      <button
+                        onClick={() => updateQuantity(item.id, 1)}
+                        className="p-1.5 hover:bg-white rounded-lg text-amber-700 transition-all active:scale-90"
+                      >
+                        <Plus size={16} />
                       </button>
                     </div>
-                  ))}
 
-                  <div className="pt-8 mt-4 border-t-2 border-dashed border-amber-100 space-y-3">
-                    <div className="flex justify-between text-amber-600 font-medium">
-                      <span>Subtotal</span>
-                      <span>${subtotal.toFixed(2)}</span>
+                    <div className="w-24 text-right font-black text-xl text-amber-900">
+                      ${(item.price * item.quantity).toFixed(2)}
                     </div>
-                    <div className="flex justify-between text-amber-600 font-medium">
-                      <span>Service Tax (10%)</span>
-                      <span>${tax.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between text-3xl font-serif font-black text-amber-900 pt-4">
-                      <span>Order Total</span>
-                      <span className="text-yellow-600">${total.toFixed(2)}</span>
-                    </div>
+
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="ml-6 p-2 text-amber-200 hover:text-red-500 transition-colors"
+                    >
+                      <Trash2 size={20} />
+                    </button>
+                  </div>
+                ))}
+
+                <div className="pt-8 mt-4 border-t-2 border-dashed border-amber-100 space-y-3">
+                  <div className="flex justify-between text-amber-600 font-medium">
+                    <span>Subtotal</span>
+                    <span>${subtotal.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-amber-600 font-medium">
+                    <span>Service Tax (10%)</span>
+                    <span>${tax.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-3xl font-serif font-black text-amber-900 pt-4">
+                    <span>Order Total</span>
+                    <span className="text-yellow-600">${total.toFixed(2)}</span>
                   </div>
                 </div>
+              </div>
             </div>
 
             <button
@@ -157,13 +157,13 @@ const BillSection: React.FC<BillSectionProps> = ({
       {showReceipt && (
         <div className="fixed inset-0 z-[60] bg-amber-900/60 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white rounded-[3rem] w-full max-w-md p-10 relative animate-in zoom-in duration-300 shadow-2xl">
-            <button 
+            <button
               onClick={() => setShowReceipt(false)}
               className="absolute top-8 right-8 text-amber-200 hover:text-amber-900 transition-colors"
             >
               <Plus className="rotate-45" size={32} />
             </button>
-            
+
             <div className="text-center mb-10">
               <div className="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6 text-white shadow-xl">
                 <Sun size={40} />
@@ -181,7 +181,7 @@ const BillSection: React.FC<BillSectionProps> = ({
                 <span className="text-sm opacity-50 font-bold uppercase tracking-widest">Order Date</span>
                 <span className="font-bold">{new Date().toLocaleDateString()}</span>
               </div>
-              
+
               <div className="py-6 space-y-3">
                 {cart.map(item => (
                   <div key={item.id} className="flex justify-between text-sm">
@@ -201,7 +201,7 @@ const BillSection: React.FC<BillSectionProps> = ({
 
             <div className="text-center">
               <p className="text-amber-600 font-bold italic mb-8">"Sunshine in every sip!"</p>
-              <button 
+              <button
                 onClick={() => {
                   window.print();
                 }}

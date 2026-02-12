@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Plus } from 'lucide-react';
-import { MENU_ITEMS, CATEGORY_ICONS } from '../constants';
-import { MenuItem } from '../types';
+import { MENU_ITEMS, CATEGORY_ICONS } from '../constants/index.tsx';
+import { MenuItem } from '../types/index';
 
 interface MenuSectionProps {
   onAddToCart: (item: MenuItem) => void;
@@ -22,13 +22,13 @@ const MenuSection: React.FC<MenuSectionProps> = ({ onAddToCart }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {MENU_ITEMS.map((item) => (
-            <div 
+            <div
               key={item.id}
               className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border border-amber-100"
             >
               <div className="h-64 overflow-hidden relative">
-                <img 
-                  src={item.image} 
+                <img
+                  src={item.image}
                   alt={item.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
