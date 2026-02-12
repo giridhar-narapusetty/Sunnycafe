@@ -1,0 +1,6 @@
+# Sunny Cafe
+
+User-agent: *
+Allow: /
+
+Sitemap: https://sunnycafe.com/sitemap.xml

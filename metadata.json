@@ -1,0 +1,8 @@
+{
+  "name": "Sunny Cafe",
+  "description": "A vibrant and warm cafe website featuring a digital menu, interactive billing system, and AI-powered drink recommendations.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

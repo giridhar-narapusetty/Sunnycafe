@@ -1,0 +1,16 @@
+{
+    "name": "Sunny Cafe",
+    "short_name": "Sunny Cafe",
+    "description": "Fresh drinks and happy moments - Order your favorite coffee, tea, and pastries online",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#78350f",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}
