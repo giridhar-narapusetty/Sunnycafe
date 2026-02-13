@@ -2,10 +2,22 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
 // Initialize the GoogleGenAI client with the required configuration.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Vite exposes env vars prefixed with VITE_ to the client
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+if (!apiKey) {
+  console.warn('VITE_GEMINI_API_KEY is not set. AI recommendations will use fallback responses.');
+}
+
+const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 export const getDrinkRecommendation = async (mood: string) => {
   try {
+    // If API key is not configured, return fallback
+    if (!ai) {
+      return "I recommend our classic Artisan Espresso to brighten your day!";
+    }
+
     // Call generateContent with the model name and prompt directly.
     const response: GenerateContentResponse = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
